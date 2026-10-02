@@ -2,7 +2,6 @@ class Automovil:
     def __init__(self, marca: str, modelo: str, velocidad_max: float, nivel_combustible: float, año_fabricacion: int):
         self.marca = marca
         self.modelo = modelo
-        # Usamos los setters directamente para que los valores se validen al crear la instancia
         self.velocidad_max = velocidad_max
         self.nivel_combustible = nivel_combustible
         self.año_fabricacion = año_fabricacion
@@ -36,3 +35,21 @@ class Automovil:
         if valor <= 0:
             raise ValueError("La velocidad máxima debe ser mayor a 0.")
         self.__velocidad_max = valor
+
+    def tiempo_llegada(self, distancia_km: float):
+        return distancia_km / self.velocidad_max
+
+    def __str__(self):
+        return f"Automóvil: {self.marca} {self.modelo} ({self.año_fabricacion}) | Vel. Máx: {self.velocidad_max} km/h | Combustible: {self.nivel_combustible}%"
+
+if __name__ == "__main__":
+    # Instancia correcta demostrando el método tiempo_llegada
+    mi_auto = Automovil("Toyota", "Corolla", 180.0, 75.5, 2020)
+    print(mi_auto)
+    print(f"Tiempo estimado para 360 km: {mi_auto.tiempo_llegada(360.0):.2f} horas")
+
+    # Prueba de validación con try/except (Año incorrecto)
+    try:
+        auto_error = Automovil("Ford", "Fiesta", 150.0, 50.0, 1800)
+    except ValueError as e:
+        print(f"Error de validación capturado: {e}")
