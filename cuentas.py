@@ -5,6 +5,7 @@ class CuentaBancaria:
         self._saldo = 0.0
 
     def depositar(self, monto: float):
+        # FIX: Se agregó validación para que el monto de depósito sea estrictamente positivo
         if monto <= 0:
             raise ValueError("El monto a depositar debe ser mayor a 0.")
         self._saldo += monto
